@@ -161,10 +161,10 @@ export const getPublicData = async () => {
   };
 
   try {
-    const configSnap = await fetchWithTimeout(getDoc(doc(db, "wedding", "config")), 2000);
+    const configSnap = await fetchWithTimeout(getDoc(doc(db, "wedding", "remix")), 2000);
     const config = configSnap.exists() ? configSnap.data() : FALLBACK_CONFIG;
     const blessingsSnap = await fetchWithTimeout(
-      getDocs(query(collection(db, "blessings"), orderBy("timestamp", "desc"))),
+      getDocs(query(collection(db, "blessings_remix"), orderBy("timestamp", "desc"))),
       2000
     );
     const blessings = blessingsSnap.docs.map((d) => ({
@@ -186,33 +186,33 @@ export const getPublicData = async () => {
 };
 
 export const submitRSVP = async (data: any) => {
-  return await addDoc(collection(db, "rsvps"), {
+  return await addDoc(collection(db, "rsvps_remix"), {
     ...data,
     timestamp: serverTimestamp(),
   });
 };
 
 export const submitBlessing = async (data: any) => {
-  return await addDoc(collection(db, "blessings"), {
+  return await addDoc(collection(db, "blessings_remix"), {
     ...data,
     timestamp: serverTimestamp(),
   });
 };
 
 export const getAdminData = async (password: string) => {
-  const configSnap = await getDoc(doc(db, "wedding", "config"));
+  const configSnap = await getDoc(doc(db, "wedding", "remix"));
   const config = configSnap.exists() ? configSnap.data() : FALLBACK_CONFIG;
   const correctPassword = config.settings?.adminPassword || "admin";
 
   if (password !== correctPassword) throw new Error("Incorrect Password.");
 
   const rsvpsSnap = await getDocs(
-    query(collection(db, "rsvps"), orderBy("timestamp", "desc")),
+    query(collection(db, "rsvps_remix"), orderBy("timestamp", "desc")),
   );
   const rsvps = rsvpsSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
 
   const blessingsSnap = await getDocs(
-    query(collection(db, "blessings"), orderBy("timestamp", "desc")),
+    query(collection(db, "blessings_remix"), orderBy("timestamp", "desc")),
   );
   const blessings = blessingsSnap.docs.map((d) => ({ id: d.id, ...d.data() }));
 
@@ -226,7 +226,7 @@ export const getAdminData = async (password: string) => {
 export const updateAdminData = async (password: string, updates: any) => {
   const current: any = await getAdminData(password);
   await setDoc(
-    doc(db, "wedding", "config"),
+    doc(db, "wedding", "remix"),
     {
       settings: { ...current.settings, ...updates.settings },
       couple: { ...current.couple, ...updates.couple },
@@ -239,9 +239,9 @@ export const updateAdminData = async (password: string, updates: any) => {
 };
 
 export const deleteRsvp = async (id: string) => {
-  await deleteDoc(doc(db, "rsvps", id));
+  await deleteDoc(doc(db, "rsvps_remix", id));
 };
 
 export const deleteBlessing = async (id: string) => {
-  await deleteDoc(doc(db, "blessings", id));
+  await deleteDoc(doc(db, "blessings_remix", id));
 };
