@@ -32,23 +32,27 @@ export default function WeddingInfoCard({ date, time, venue, mapsLink }: Wedding
     };
 
     const drawOverlay = () => {
-      // Create rich golden foil gradient
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, "#8B6508"); // Dark gold
-      gradient.addColorStop(0.3, "#DAA520"); // Goldenrod
-      gradient.addColorStop(0.5, "#FFDF00"); // Bright gold
-      gradient.addColorStop(0.7, "#DAA520");
-      gradient.addColorStop(1, "#8B6508");
-
+      gradient.addColorStop(0, "#C59B27");
+      gradient.addColorStop(0.3, "#F3E5AB");
+      gradient.addColorStop(0.5, "#D4AF37");
+      gradient.addColorStop(0.7, "#FFFDD0");
+      gradient.addColorStop(1, "#AA7900");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.strokeStyle = "rgba(255,255,255,0.4)";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(4, 4, canvas.width - 8, canvas.height - 8);
 
-      // Add "Scratch to Reveal" text
-      ctx.fillStyle = "#4a3500";
-      ctx.font = "bold 14px Inter, sans-serif";
+      ctx.fillStyle = "#3E2723";
+      ctx.font = "bold 20px 'Cinzel', serif";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.fillText("✦ SCRATCH TO REVEAL DETAILS ✦", canvas.width / 2, canvas.height / 2);
+      ctx.shadowColor = "rgba(255,255,255,0.6)";
+      ctx.shadowBlur = 4;
+      ctx.fillText("✨ Scratch to Reveal ✨", canvas.width / 2, canvas.height / 2);
+      ctx.shadowBlur = 0;
     };
 
     resizeCanvas();
