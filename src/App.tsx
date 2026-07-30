@@ -21,6 +21,7 @@ import AdminPanel from "./components/AdminPanel";
 import WeddingInfoCard from "./components/WeddingInfoCard";
 import SectionDivider from "./components/SectionDivider";
 import ScrollToTop from "./components/ScrollToTop";
+import FloatingElements from "./components/FloatingElements";
 
 import { getPublicData } from "./firebase";
 
@@ -128,6 +129,8 @@ export default function App() {
       
       {/* 1. PARALLAX AMBIENT BACKGROUNDS & PARTICLES */}
       <BackgroundEffects />
+      <FloatingElements />
+      <FloatingElements />
 
       {/* 2. OPENING WAX SEAL DOOR ANIMATION OVERLAY */}
       <AnimatePresence>
