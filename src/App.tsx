@@ -17,6 +17,7 @@ import FamilySection from "./components/FamilySection";
 import LocationSection from "./components/LocationSection";
 import RSVPSection from "./components/RSVPSection";
 import BlessingsWall from "./components/BlessingsWall";
+import RegistrySection from "./components/RegistrySection";
 import AdminPanel from "./components/AdminPanel";
 import WeddingInfoCard from "./components/WeddingInfoCard";
 import SectionDivider from "./components/SectionDivider";
@@ -216,7 +217,14 @@ export default function App() {
           )}
 
           {/* PHOTO SLIDER */}
-          {settings.sections.gallery && (
+          {settings.sections.registries && data.registries && data.registries.length > 0 && (
+          <>
+            <SectionDivider />
+            <RegistrySection registries={data.registries} />
+          </>
+        )}
+
+        {settings.sections.gallery && (
             <FadeInSection>
               <PhotoGallery images={gallery} />
               <SectionDivider />

@@ -55,6 +55,7 @@ const FALLBACK_CONFIG = {
       location: true,
       rsvp: true,
       blessings: true,
+      registries: true,
     },
     seo: {
       title: "Michael & Sarah - Holy Matrimony Invitation",
@@ -139,7 +140,22 @@ const FALLBACK_CONFIG = {
         "https://images.unsplash.com/photo-1525648199074-cee30ba79a4a?auto=format&fit=crop&q=80&w=900",
     },
   ],
-  family: {
+  
+  registries: [
+    {
+      id: "reg-1",
+      storeName: "Macy's",
+      url: "https://www.macys.com",
+      description: "Home goods and kitchenware"
+    },
+    {
+      id: "reg-2",
+      storeName: "Williams Sonoma",
+      url: "https://www.williams-sonoma.com",
+      description: "Kitchen appliances and cookware"
+    }
+  ],
+family: {
     bride: { relation: "Sister", name: "Emily Jenkins" },
     groom: { relation: "Brother", name: "David Alexander Jr." },
   },
@@ -177,6 +193,7 @@ export const getPublicData = async () => {
       events: config.events,
       family: config.family,
       gallery: config.gallery,
+      registries: config.registries || FALLBACK_CONFIG.registries,
       blessings: blessings,
     };
   } catch (e) {
@@ -233,6 +250,7 @@ export const updateAdminData = async (password: string, updates: any) => {
       events: updates.events || current.events,
       family: updates.family || current.family,
       gallery: updates.gallery || current.gallery,
+      registries: updates.registries || current.registries,
     },
     { merge: true },
   );

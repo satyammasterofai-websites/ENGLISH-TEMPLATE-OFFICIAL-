@@ -94,24 +94,6 @@ export default function PhotoGallery({ images }: PhotoGalleryProps) {
           </div>
         </div>
       </div>
-
-      {/* Thumbnail Indicators */}
-      <div className="flex justify-center items-center gap-3 mt-6 flex-wrap">
-        {list.map((img, idx) => (
-          <button
-            key={idx}
-            onClick={() => setActiveIndex(idx)}
-            className={`relative rounded-md overflow-hidden aspect-video w-16 sm:w-20 border transition-all duration-300 cursor-pointer ${
-              idx === activeIndex
-                ? "border-gold-400 scale-105 shadow-lg"
-                : "border-gold-200/30 opacity-40 hover:opacity-80"
-            }`}
-          >
-            <img src={img} alt="thumbnail" referrerPolicy="no-referrer" className="w-full h-full object-cover" />
-          </button>
-        ))}
-      </div>
-
     </section>
   );
 }

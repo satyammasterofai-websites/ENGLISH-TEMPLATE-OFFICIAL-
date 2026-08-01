@@ -11,14 +11,18 @@ export default function EventsSection({ events, eventsImage }: EventsSectionProp
   return (
     <section id="events-section" className="relative py-24 px-4 z-10 max-w-7xl mx-auto">
       
-      <div className="text-center mb-16">
-        <span className="text-gold-200 font-serif text-sm tracking-[0.25em] uppercase block mb-2">
+      <div className="text-center mb-16 relative">
+        <span className="text-gold-300 font-serif text-sm tracking-[0.3em] uppercase block mb-3 drop-shadow-sm">
           Liturgical Celebrations
         </span>
-        <h2 className="font-serif text-3xl sm:text-4xl text-gold-200 tracking-wider font-semibold mb-3">
+        <h2 className="font-serif text-4xl sm:text-5xl text-black tracking-wider font-bold mb-4 drop-shadow-sm">
           Wedding Events
         </h2>
-        <div className="h-[1px] w-32 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-4" />
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <div className="h-[1px] w-16 bg-gradient-to-l from-gold-400 to-transparent" />
+          <div className="w-2 h-2 rounded-full bg-gold-400 rotate-45" />
+          <div className="h-[1px] w-16 bg-gradient-to-r from-gold-400 to-transparent" />
+        </div>
       </div>
 
       {/* Grid of Scratch Cards fallback or detail blocks */}

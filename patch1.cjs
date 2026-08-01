@@ -1,15 +1,14 @@
 const fs = require('fs');
-let content = fs.readFileSync('src/components/TimelineSection.tsx', 'utf8');
+let content = fs.readFileSync('src/components/EventsSection.tsx', 'utf8');
 
-// Update section heading
 content = content.replace(
   /<div className="text-center mb-16">[\s\S]*?<\/div>/,
   `<div className="text-center mb-16 relative">
         <span className="text-gold-300 font-serif text-sm tracking-[0.3em] uppercase block mb-3 drop-shadow-sm">
-          Chronology of Sacraments
+          Liturgical Celebrations
         </span>
         <h2 className="font-serif text-4xl sm:text-5xl text-gold-200 tracking-wider font-bold mb-4 drop-shadow-md">
-          Our Wedding Timeline
+          Wedding Events
         </h2>
         <div className="flex items-center justify-center gap-4 mt-6">
           <div className="h-[1px] w-16 bg-gradient-to-l from-gold-400 to-transparent" />
@@ -18,11 +17,4 @@ content = content.replace(
         </div>
       </div>`
 );
-
-// Update event item headings
-content = content.replace(
-  /<h3 className="font-serif text-xl font-bold text-gold-100 group-hover:text-gold-200 transition-colors">/g,
-  '<h3 className="font-serif text-2xl font-bold text-gold-300 group-hover:text-gold-200 transition-colors drop-shadow-sm">'
-);
-
-fs.writeFileSync('src/components/TimelineSection.tsx', content);
+fs.writeFileSync('src/components/EventsSection.tsx', content);

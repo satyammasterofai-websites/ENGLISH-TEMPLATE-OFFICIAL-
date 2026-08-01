@@ -10,6 +10,7 @@ export interface SectionConfig {
   location: boolean;
   rsvp: boolean;
   blessings: boolean;
+  registries?: boolean;
 }
 
 export interface SEOMetadata {
@@ -66,6 +67,15 @@ export interface FamilyConfig {
   groom: FamilyRelation;
 }
 
+
+export interface Registry {
+  id: string;
+  storeName: string;
+  url: string;
+  description?: string;
+  logoUrl?: string;
+}
+
 export interface RSVP {
   id: string;
   name: string;
@@ -92,6 +102,7 @@ export interface WeddingData {
   family: FamilyConfig;
   gallery: string[];
   blessings: Blessing[];
+  registries?: Registry[];
 }
 
 export interface FullAdminData extends WeddingData {

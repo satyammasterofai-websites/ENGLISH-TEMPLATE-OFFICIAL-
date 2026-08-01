@@ -44,14 +44,18 @@ export default function TimelineSection() {
   return (
     <section className="relative py-24 px-4 z-10 max-w-5xl mx-auto overflow-hidden">
       
-      <div className="text-center mb-16">
-        <span className="text-gold-200 font-serif text-sm tracking-[0.25em] uppercase block mb-2">
+      <div className="text-center mb-16 relative">
+        <span className="text-gold-300 font-serif text-sm tracking-[0.3em] uppercase block mb-3 drop-shadow-sm">
           Chronology of Sacraments
         </span>
-        <h2 className="font-serif text-3xl sm:text-4xl text-gold-200 tracking-wider font-semibold mb-3">
+        <h2 className="font-serif text-4xl sm:text-5xl text-gold-200 tracking-wider font-bold mb-4 drop-shadow-md">
           Our Wedding Timeline
         </h2>
-        <div className="h-[1px] w-32 bg-gradient-to-r from-transparent via-gold-400 to-transparent mx-auto mt-3" />
+        <div className="flex items-center justify-center gap-4 mt-6">
+          <div className="h-[1px] w-16 bg-gradient-to-l from-gold-400 to-transparent" />
+          <div className="w-2 h-2 rounded-full bg-gold-400 rotate-45" />
+          <div className="h-[1px] w-16 bg-gradient-to-r from-gold-400 to-transparent" />
+        </div>
       </div>
 
       {/* Timeline core tree */}
@@ -86,7 +90,7 @@ export default function TimelineSection() {
                     <span className="text-[10px] text-gold-200 font-sans tracking-widest uppercase block mb-1">
                       {item.date} • {item.time}
                     </span>
-                    <h3 className="font-serif text-xl font-bold text-gold-100 group-hover:text-gold-200 transition-colors">
+                    <h3 className="font-serif text-2xl font-bold text-gold-300 group-hover:text-gold-200 transition-colors drop-shadow-sm">
                       {item.title}
                     </h3>
                     <p className="text-gray-600 text-xs sm:text-sm mt-2 leading-relaxed font-sans">

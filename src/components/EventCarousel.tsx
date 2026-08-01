@@ -54,29 +54,21 @@ export default function EventCarousel({ events }: EventCarouselProps) {
           transition={{ duration: 0.6 }}
           className="w-full flex flex-col md:flex-row"
         >
-          {/* Thumbnail Image */}
-          <div className="w-full md:w-5/12 aspect-video md:aspect-auto relative bg-amber-50">
-            {event.image ? (
-              <img 
-                src={event.image} 
-                alt={event.title} 
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-gold-900">
-                <MapPin className="w-12 h-12 opacity-20" />
-              </div>
-            )}
-          </div>
-
           {/* Event Details */}
-          <div className="w-full md:w-7/12 p-8 md:p-12 flex flex-col justify-center relative">
+          <div className="w-full p-8 md:p-12 flex flex-col justify-center items-center text-center relative">
             <span className="text-gold-200 text-[10px] uppercase tracking-[0.3em] font-sans mb-3 block">
               Event Details
             </span>
-            <h3 className="font-serif text-3xl md:text-4xl text-gold-100 mb-6 drop-shadow-md">
-              {event.title}
-            </h3>
+            <div className="relative inline-block mb-6">
+              <h3 className="font-serif text-4xl md:text-5xl text-black font-bold drop-shadow-sm pb-4">
+                {event.title}
+              </h3>
+              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[200px] flex items-center justify-center gap-2">
+                <div className="h-[2px] flex-grow bg-gradient-to-l from-gold-500 to-transparent"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-gold-500 rotate-45"></div>
+                <div className="h-[2px] flex-grow bg-gradient-to-r from-gold-500 to-transparent"></div>
+              </div>
+            </div>
 
             {/* Date Scratch Card integration will be here */}
             <div className="mb-8">
@@ -92,9 +84,9 @@ export default function EventCarousel({ events }: EventCarouselProps) {
               />
             </div>
 
-            <div className="space-y-6 text-gray-700 font-sans text-sm md:text-base">              
-              <div className="flex items-start gap-4">
-                <MapPin className="w-5 h-5 text-gold-500 shrink-0 mt-0.5" />
+            <div className="space-y-6 text-gray-700 font-sans text-sm md:text-base flex flex-col items-center">              
+              <div className="flex flex-col items-center gap-3">
+                <MapPin className="w-6 h-6 text-gold-400 shrink-0" />
                 <div>
                   <p className="text-gold-50 font-medium">{event.venue}</p>
                   <p className="text-gray-600 text-xs mt-1">{event.details}</p>
