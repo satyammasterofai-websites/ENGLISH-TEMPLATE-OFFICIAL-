@@ -101,16 +101,17 @@ export default function AdminPanel({ onClose, onRefreshPublicData }: AdminPanelP
   // CSV Export Trigger
   const handleCSVExport = () => {
     if (!db) return;
-    let csv = "ID,Full Name,Phone Number,Email,Number of Guests,Will Attend?,Message,Submitted At\n";
+    let csv = "ID,Full Name,Phone Number,Email,Number of Guests,Will Attend?,Side,Message,Submitted At\n";
     db.rsvps.forEach((r: any) => {
       const name = `"${(r.name || '').replace(/"/g, '""')}"`;
       const phone = `"${(r.phone || '').replace(/"/g, '""')}"`;
       const email = `"${(r.email || '').replace(/"/g, '""')}"`;
       const guests = r.guests || 1;
       const attending = `"${(r.attending || '').replace(/"/g, '""')}"`;
+      const side = `"${(r.side || '').replace(/"/g, '""')}"`;
       const message = `"${(r.message || '').replace(/"/g, '""')}"`;
       const time = `"${(r.timestamp ? new Date(r.timestamp?.seconds ? r.timestamp.seconds * 1000 : r.timestamp).toISOString() : '').replace(/"/g, '""')}"`;
-      csv += `${r.id},${name},${phone},${email},${guests},${attending},${message},${time}\n`;
+      csv += `${r.id},${name},${phone},${email},${guests},${attending},${side},${message},${time}\n`;
     });
     
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
@@ -190,15 +191,46 @@ export default function AdminPanel({ onClose, onRefreshPublicData }: AdminPanelP
     });
   };
 
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, updater: (url: string) => void) => {
+    const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>, updater: (url: string) => void) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        updater(reader.result as string);
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      const img = new window.Image();
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const MAX_WIDTH = 1200;
+        const MAX_HEIGHT = 1200;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height = Math.round((height *= MAX_WIDTH / width));
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width = Math.round((width *= MAX_HEIGHT / height));
+            height = MAX_HEIGHT;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext("2d");
+        if (ctx) {
+          ctx.drawImage(img, 0, 0, width, height);
+          const dataUrl = canvas.toDataURL("image/jpeg", 0.7);
+          updater(dataUrl);
+        } else {
+          updater(reader.result as string);
+        }
       };
-      reader.readAsDataURL(file);
-    }
+      img.src = reader.result as string;
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -888,7 +920,7 @@ export default function AdminPanel({ onClose, onRefreshPublicData }: AdminPanelP
                           className="flex items-center gap-1.5 py-2 px-4 rounded-lg bg-emerald-800 border border-gold-400/30 text-gold-200 hover:text-gold-100 hover:border-gold-400 text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer"
                         >
                           <Download className="w-4 h-4" />
-                          Export RSVPs as CSV
+                          Download CSV
                         </button>
                       </div>
 
